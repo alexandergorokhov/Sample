@@ -9,7 +9,7 @@ Maven 3.3 or higher.
 ## Installation
 From the root of the project run :
 mvn clean install.
-##Testing
+## Testing
 The programs contains unit test as part of the code. SimulationTest due to its time consumption on each build, but
 It can be run separately as part of integration.
 The program contains Jacoco plugin and coverage, branches, etc can be viewed in target/site.
