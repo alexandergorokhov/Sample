@@ -1,4 +1,5 @@
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import solar.simulation.Simulation;
 
 import java.util.HashMap;
 
-//@Ignore
+@Ignore
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {Merli.class, Simulation.class, WeatherServiceImpl.class, WeatherRepository.class})
 public class SimulationTest {
