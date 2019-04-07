@@ -8,7 +8,7 @@ Java 8 or higher.
 Maven 3.3 or higher.
 ## Installation
 From the root of the project run :
-mvn clean install
+mvn clean install.
 ##Testing
 The programs contains unit test as part of the code. SimulationTest due to its time consumption on each build, but
 It can be run separately as part of integration.
