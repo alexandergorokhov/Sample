@@ -15,7 +15,7 @@ mvn spring-boot:run
 
 ## Endpoints to interact with:
 http://localhost:8080/clima?day=
-Insert after = the day for which you want to know the weather. Days should be Integers.
+Insert after ""=" the day for which you want to know the weather. Days should be Integers.
 
 ##Testing
 The programs contains unit test as part of the code. SimulationTest due to its time consumption on each build, but
