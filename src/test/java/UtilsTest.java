@@ -1,6 +1,5 @@
 import org.junit.Assert;
 import org.junit.Test;
-import solar.pojo.Triangle;
 import solar.pojo.Point;
 import solar.utils.Utils;
 
@@ -66,4 +65,19 @@ public class UtilsTest {
 
     }
 
+    @Test
+    public void shouldRetrunTheTrianglePerimeterTest() {
+
+        Point side1 = Utils.fromPolarToCartesians(500, Utils.fromDegreesToRadiants(45));
+        Point side2 = Utils.fromPolarToCartesians(1000, Utils.fromDegreesToRadiants(0));
+        Point side3 = Utils.fromPolarToCartesians(2000, Utils.fromDegreesToRadiants(225));
+        Point[] points = new Point[3];
+        points[0] = side1;
+        points[1] = side2;
+        points[2] = side3;
+        int result = Utils.getPerimeter(points).intValue();
+        Assert.assertEquals(6034, result);
+
+
+    }
 }

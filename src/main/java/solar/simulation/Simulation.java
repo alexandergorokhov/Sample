@@ -21,9 +21,10 @@ public class Simulation {
     private Map<String, PositionPlanetAnalyzer> positionPlanetAnalyzers;
     private HashMap<String, Integer> weatherMap;
 
+
     @Autowired
     public Simulation(ArrayList<Planet> planets, Map<String, PositionPlanetAnalyzer> positionPlanetAnalyzers,
-                      CoolinearPlanetAnalizer coolinearPlanetAnalizer,TrianglePlanetAnalyzer trianglePlanetAnalyzer) {
+                      CoolinearPlanetAnalizer coolinearPlanetAnalizer, TrianglePlanetAnalyzer trianglePlanetAnalyzer) {
         this.planets = planets;
         this.positionPlanetAnalyzers = positionPlanetAnalyzers;
         this.addPlanet(new Planet(1, 500, "Ferengi"));
@@ -32,19 +33,20 @@ public class Simulation {
         this.addPositionPlanetAnalyzer(coolinearPlanetAnalizer);
         this.addPositionPlanetAnalyzer(trianglePlanetAnalyzer);
         weatherMap = new HashMap();
-        weatherMap.put("Drought",0);
-        weatherMap.put("Optimal Condition",0);
-        weatherMap.put("Rain",0);
-        weatherMap.put("Maximum Rain Day",0);
-    }
-
-    public HashMap<String, Integer> getWeatherMap() {
-        return weatherMap;
+        weatherMap.put("Drought", 0);
+        weatherMap.put("Optimal Condition", 0);
+        weatherMap.put("Rain", 0);
+        weatherMap.put("Maximum Rain Day", 0);
     }
 
     @PostConstruct
     public void init() {
         this.runSimulationNoThreads(10);
+    }
+
+
+    public HashMap<String, Integer> getWeatherMap() {
+        return weatherMap;
     }
 
     public void addPlanet(Planet planet) {
@@ -61,9 +63,9 @@ public class Simulation {
         for (int i = 0; i <= days; i++) {
             try {
 
-                Point[] points = getCartesianCoordenatsVectorOnADay(i);
-                positionPlanetAnalyzers.get("CoolinearPlanetAnalizer").weatherFiller(weatherMap,points,i);
-                positionPlanetAnalyzers.get("TrianglePlanetAnalyzer").weatherFiller(weatherMap,points,i);
+                Point[] points = Utils.getCartesianCoordenatsVectorOnADay(i,planets);
+                positionPlanetAnalyzers.get("CoolinearPlanetAnalizer").weatherFiller(weatherMap, points, i);
+                positionPlanetAnalyzers.get("TrianglePlanetAnalyzer").weatherFiller(weatherMap, points, i);
             } catch (IllegalArgumentException e) {
 
                 System.out.println("Exception : " + e.getMessage());
@@ -73,7 +75,7 @@ public class Simulation {
         System.out.println("Simulation ended");
 
         System.out.println("Results ; Drought: " + weatherMap.get("Drought")
-                + " Rain: " +  weatherMap.get("Rain")
+                + " Rain: " + weatherMap.get("Rain")
                 + " Maximum Rain Day: " + weatherMap.get("Maximum Rain Day")
                 + " Optimal conditions: " + weatherMap.get("Optimal Condition")
         );
@@ -87,19 +89,6 @@ public class Simulation {
             points[j] = Utils.fromPolarToCartesians(planet.getRadiusKm(), Utils.fromDegreesToRadiants(planet.getPositionAtOrbitInDegreesAtDay(i)));
         }
         return points;
-    }
-
-    public boolean checkRainning(int i, Point[] points) {
-        PositionPlanetAnalyzer positionPlanetAnalyzer;
-        positionPlanetAnalyzer = positionPlanetAnalyzers.get("TrianglePlanetAnalyzer");
-
-        if (positionPlanetAnalyzer.isPositionConditionSatisfied(points)) {
-
-            if (positionPlanetAnalyzer.isPositionIncludesTheSun(points)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 

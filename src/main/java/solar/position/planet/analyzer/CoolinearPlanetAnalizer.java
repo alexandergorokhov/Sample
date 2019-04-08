@@ -14,6 +14,22 @@ public class CoolinearPlanetAnalizer implements PositionPlanetAnalyzer {
     @Autowired
     WeatherService weatherService;
 
+    public void weatherFiller(HashMap<String, Integer> weatherMap, Point[] points, int day) {
+        if (isPositionConditionSatisfied(points)) {
+            if (isPositionIncludesTheSun(points)) {
+                weatherService.saveOrUpdate(new Weather(day, "Drought/Sequia"));
+                Integer drought = weatherMap.get("Drought");
+                weatherMap.put("Drought", ++drought);
+
+            } else {
+                weatherService.saveOrUpdate(new Weather(day, "Optimal Condition/Condicion Optima"));
+                Integer optimalCondition = weatherMap.get("Optimal Condition");
+                weatherMap.put("Optimal Condition", ++optimalCondition);
+
+            }
+        }
+    }
+
     @Override
     public boolean isPositionConditionSatisfied(Point[] points) {
         //(y3 - y2) * (x2 - x1) == (y2 - y1) * (x3 - x2)
@@ -44,21 +60,6 @@ public class CoolinearPlanetAnalizer implements PositionPlanetAnalyzer {
 
     }
 
-    public void weatherFiller(HashMap<String, Integer> weatherMap, Point[] points, int day) {
-        if (isPositionConditionSatisfied(points)) {
-            if (isPositionIncludesTheSun(points)) {
-                weatherService.saveOrUpdate(new Weather(day, "Drought/Sequia"));
-                Integer drought = weatherMap.get("Drought");
-                weatherMap.put("Drought", ++drought);
-
-            } else {
-                weatherService.saveOrUpdate(new Weather(day, "Optimal Condition/Condicion Optima"));
-                Integer optimalCondition = weatherMap.get("Optimal Condition");
-                weatherMap.put("Optimal Condition", ++optimalCondition);
-
-            }
-        }
-    }
 
     @Override
     public String toString() {

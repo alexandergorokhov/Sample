@@ -1,8 +1,11 @@
 package solar.utils;
 
+import solar.pojo.Planet;
 import solar.pojo.Point;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 
 public class Utils {
 
@@ -54,11 +57,20 @@ public class Utils {
         return distance;
     }
 
-    public static double getPerimeter(Point[] points) {
+    public static Double getPerimeter(Point[] points) {
         double side1 = calculateDistanceBetweenTwoPoints(points[0], points[1]);
         double side2 = calculateDistanceBetweenTwoPoints(points[1], points[2]);
         double side3 = calculateDistanceBetweenTwoPoints(points[2], points[0]);
         return side1 + side2 + side3;
+    }
+
+    public static Point[] getCartesianCoordenatsVectorOnADay(int i, ArrayList<Planet> planets) {
+        Point[] points = new Point[3];
+        for (int j = 0; j < planets.size(); j++) {
+            Planet planet = planets.get(j);
+            points[j] = Utils.fromPolarToCartesians(planet.getRadiusKm(), Utils.fromDegreesToRadiants(planet.getPositionAtOrbitInDegreesAtDay(i)));
+        }
+        return points;
     }
 
 

@@ -12,10 +12,13 @@ import java.util.HashMap;
 
 @Component
 public class TrianglePlanetAnalyzer implements PositionPlanetAnalyzer {
+
     @Autowired
     WeatherService weatherService;
+
     private Triangle triangle;
     private double maxPerimeter;
+
 
     public TrianglePlanetAnalyzer() {
     }
@@ -34,6 +37,30 @@ public class TrianglePlanetAnalyzer implements PositionPlanetAnalyzer {
 
 
     @Override
+    public void weatherFiller(HashMap<String, Integer> weatherMap, Point[] points, int day) {
+        if (checkRainning(day, points)) {
+            weatherService.saveOrUpdate(new Weather(day, "Rain/Lluvia"));
+            Integer rain = weatherMap.get("Rain");
+            weatherMap.put("Rain", ++rain);
+            computeMaximumPerimeter(day, points, weatherMap);
+
+        } else {
+            weatherService.saveOrUpdate(new Weather(day, "Normal weather/ Clima normal"));
+        }
+    }
+
+    public boolean checkRainning(int i, Point[] points) {
+
+        if (isPositionConditionSatisfied(points)) {
+
+            if (isPositionIncludesTheSun(points)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean isPositionConditionSatisfied(Point[] points) {
 
         triangle = formATriangle(points);
@@ -47,31 +74,7 @@ public class TrianglePlanetAnalyzer implements PositionPlanetAnalyzer {
         return triangle.containsPoint(new Point(0D, 0D));
     }
 
-    @Override
-    public void weatherFiller(HashMap<String, Integer> weatherMap, Point[] points, int day) {
-        if (checkRainning(day, points)) {
-            weatherService.saveOrUpdate(new Weather(day, "Rain/Lluvia"));
-            Integer rain = weatherMap.get("Rain");
-            weatherMap.put("Rain", ++rain);
-            computeMaximumPerimeter(day, points, weatherMap);
-
-        } else {
-            weatherService.saveOrUpdate(new Weather(day, "Normal weather/ Clima normal"));
-        }
-    }
-
-    private boolean checkRainning(int i, Point[] points) {
-
-        if (isPositionConditionSatisfied(points)) {
-
-            if (isPositionIncludesTheSun(points)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void computeMaximumPerimeter(int day, Point[] points, HashMap<String, Integer> weatherMap) {
+    public void computeMaximumPerimeter(int day, Point[] points, HashMap<String, Integer> weatherMap) {
         double possibleMaxPerimeter = Utils.getPerimeter(points);
         if (possibleMaxPerimeter > maxPerimeter) {
             maxPerimeter = possibleMaxPerimeter;

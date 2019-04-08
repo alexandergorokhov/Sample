@@ -24,7 +24,7 @@ public class WeatherServiceImpl implements WeatherService {
         try {
             weatherRepository.save(weather);
         }catch (Exception e){
-            System.out.println("GOTCHA ");
+            System.out.println("Exception occured while saving the data");
         }
 
     }
