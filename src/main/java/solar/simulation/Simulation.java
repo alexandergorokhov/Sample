@@ -82,14 +82,4 @@ public class Simulation {
 
     }
 
-    public Point[] getCartesianCoordenatsVectorOnADay(int i) {
-        Point[] points = new Point[3];
-        for (int j = 0; j < planets.size(); j++) {
-            Planet planet = planets.get(j);
-            points[j] = Utils.fromPolarToCartesians(planet.getRadiusKm(), Utils.fromDegreesToRadiants(planet.getPositionAtOrbitInDegreesAtDay(i)));
-        }
-        return points;
-    }
-
-
-}
+  }
