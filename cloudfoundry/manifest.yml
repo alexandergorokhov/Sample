@@ -5,4 +5,4 @@ applications:
   random-route: true
   path: ../target/Merli-cf.jar
   env:
-    SPRING_PROFILES_ACTIVE: cloud,mysql
+    SPRING_PROFILES_ACTIVE: cloud

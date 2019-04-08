@@ -19,4 +19,9 @@ mvn spring-boot:run
 ## Endpoints to interact with:
 http://localhost:8080/clima?day=
 Insert after "=" the day for which you want to know the weather. Days should be Integers.
+## Cloud:
+Cloud deployment is done for cloud foundry
+To compile the project for cloud deployment from the root of the project use: mvn clean install spring-boot:repackage -P cloudfoundry
+To deploy access cloudfoundry directory and login to your cf space: cf push.
+Varibles of deployment can be modified in manifest.yml
 
