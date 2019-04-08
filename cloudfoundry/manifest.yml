@@ -1,0 +1,8 @@
+---
+applications:
+- name: Merli-App
+  memory: 1024M
+  random-route: true
+  path: ../target/Merli-cf.jar
+  env:
+    SPRING_PROFILES_ACTIVE: cloud,mysql
