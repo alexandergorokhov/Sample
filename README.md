@@ -22,7 +22,8 @@ http://localhost:8080/clima?day=
 Insert after "=" the day for which you want to know the weather. Days should be Integers.
 ## On cloud
 https://merli-app-fantastic-panther.cfapps.io/clima?day= .
-Insert after "=" the day for which you want to know the weather.  Days should be Integers.
+Insert after "=" the day for which you want to know the weather.  
+Days should be Integers.
 Thid endpoint avalibility may change.
 # Cloud:
 Cloud deployment is done for cloud foundry
