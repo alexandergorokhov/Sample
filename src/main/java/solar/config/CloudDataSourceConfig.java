@@ -1,4 +1,4 @@
-package com.baeldung.cloud.config;
+package solar.config;
 
 import org.springframework.cloud.config.java.AbstractCloudConfig;
 import org.springframework.context.annotation.Bean;
