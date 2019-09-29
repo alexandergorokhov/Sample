@@ -8,6 +8,8 @@
   1. How many drought period there will be?
   2. How many rain periods and its maximum day?
   3. How many optimum weather conditions days there will be?
+  4. Provide REST API to consult a certain weather on certain day within nex 10 years.
+  5. Provide persistnce and deploy to cloud provider.
 # Assumptions about the system.
 Since no information has been provided following assumptions has been made:
 1. If the triangle does not include the sun, the weather is normal.
